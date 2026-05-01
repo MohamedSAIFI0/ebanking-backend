@@ -15,9 +15,11 @@ import java.util.List;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class BankAccount {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private double balance;
     private Date createdAt;
+    @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
     @ManyToOne
