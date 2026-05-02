@@ -13,7 +13,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TYPE", length = 4, discriminatorType = DiscriminatorType.STRING)
 @Data @NoArgsConstructor @AllArgsConstructor
-public class BankAccount {
+public abstract class BankAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -25,6 +25,6 @@ public class BankAccount {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "bankAccount")
+    @OneToMany(mappedBy = "bankAccount", fetch = FetchType.LAZY)
     private List<AccountOperation> accountOperations;
 }

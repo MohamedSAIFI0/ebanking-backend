@@ -2,6 +2,7 @@ package com.ebankingbackend;
 
 import com.ebankingbackend.entities.*;
 import com.ebankingbackend.enums.AccountStatus;
+import com.ebankingbackend.enums.OperationType;
 import com.ebankingbackend.repositories.AccountOperationRepository;
 import com.ebankingbackend.repositories.BankAccountRepository;
 import com.ebankingbackend.repositories.CustomerRepository;
@@ -50,6 +51,21 @@ public class EbankingBackendApplication {
                 savingAccount.setInterestRate(900);
                 bankAccountRepository.save(savingAccount);
             });
+
+            bankAccountRepository.findAll().forEach(acc->{
+                for(int i=0; i<10 ; i++){
+                    AccountOperation accountOperation = new AccountOperation();
+                    accountOperation.setOperationDate(new Date());
+                    accountOperation.setAmount(Math.random()*11200);
+                    accountOperation.setType(Math.random() > 0.5 ? OperationType.DEBIT: OperationType.CREDIT);
+                    accountOperation.setBankAccount(acc);
+                    accountOperationRepository.save(accountOperation);
+                }
+            });
+
+            BankAccount bankAccount = bankAccountRepository.findById("20cbfa28-0b4e-4070-a891-a357518ec30a").orElse(null);
+
+
 
 
         };
