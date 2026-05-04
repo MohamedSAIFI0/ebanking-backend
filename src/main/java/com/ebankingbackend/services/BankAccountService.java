@@ -1,9 +1,6 @@
 package com.ebankingbackend.services;
 
-import com.ebankingbackend.dtos.BankAccountDTO;
-import com.ebankingbackend.dtos.CurrentBankAccountDTO;
-import com.ebankingbackend.dtos.CustomerDTO;
-import com.ebankingbackend.dtos.SavingBankAccountDTO;
+import com.ebankingbackend.dtos.*;
 import com.ebankingbackend.entities.BankAccount;
 import com.ebankingbackend.exceptions.BalanceNotSufficentException;
 import com.ebankingbackend.exceptions.BankAccountNotFoundException;
@@ -35,4 +32,8 @@ public interface BankAccountService {
     CustomerDTO updateCustomer(CustomerDTO customerDTO);
 
     void deleteCustomer(Long customerId);
+
+    List<AccountOperationDTO> accountHistory(String accountId);
+
+    AccountHistoryDTO getAccountHistory(String accountId, int page, int size) throws BankAccountNotFoundException;
 }
