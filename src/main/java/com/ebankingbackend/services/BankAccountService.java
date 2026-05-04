@@ -1,9 +1,10 @@
 package com.ebankingbackend.services;
 
+import com.ebankingbackend.dtos.BankAccountDTO;
+import com.ebankingbackend.dtos.CurrentBankAccountDTO;
+import com.ebankingbackend.dtos.CustomerDTO;
+import com.ebankingbackend.dtos.SavingBankAccountDTO;
 import com.ebankingbackend.entities.BankAccount;
-import com.ebankingbackend.entities.CurrentAccount;
-import com.ebankingbackend.entities.Customer;
-import com.ebankingbackend.entities.SavingAccount;
 import com.ebankingbackend.exceptions.BalanceNotSufficentException;
 import com.ebankingbackend.exceptions.BankAccountNotFoundException;
 
@@ -11,15 +12,15 @@ import java.util.List;
 
 public interface BankAccountService {
 
-    Customer saveCustomer(Customer customer);
+    CustomerDTO saveCustomer(CustomerDTO customer);
 
-    CurrentAccount saveCurrentBankAccount(double initialBalance, Long customerId, double overDraft );
+    CurrentBankAccountDTO saveCurrentBankAccount(double initialBalance, Long customerId, double overDraft );
 
-    SavingAccount saveSavingBankAccount(double initialBalance, Long customerId, double interestRate);
+    SavingBankAccountDTO saveSavingBankAccount(double initialBalance, Long customerId, double interestRate);
 
-    List<Customer> listCustomers();
+    List<CustomerDTO> listCustomers();
 
-    BankAccount getBankAccount(String accountId) throws BankAccountNotFoundException;
+    BankAccountDTO getBankAccount(String accountId) throws BankAccountNotFoundException;
 
     void debit(String accountId, double amount, String description) throws BankAccountNotFoundException, BalanceNotSufficentException;
 
@@ -27,4 +28,11 @@ public interface BankAccountService {
 
     void transfer(String accountIdSource, String accountIdDestination, double amount) throws BankAccountNotFoundException, BalanceNotSufficentException;
 
+    List<BankAccountDTO> bankAccountList();
+
+    CustomerDTO getCustomer(Long customerId);
+
+    CustomerDTO updateCustomer(CustomerDTO customerDTO);
+
+    void deleteCustomer(Long customerId);
 }
