@@ -63,8 +63,4 @@ public class BankAccountMapperImpl {
         BeanUtils.copyProperties(accountOperation, accountOperationDTO);
         return accountOperationDTO;
     }
-
-
-
-
 }
